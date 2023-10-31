@@ -1,0 +1,17 @@
+from .buffer_river import river_buffer
+frpm .build_step import building_setup
+
+
+def buffered_pieplot(*args, polygon_buffer = 0.005, river_buffer = 0.003, n = 9, m = 20):
+    """
+    INFO
+    """
+    river, polygon, buff = river_buffer(*args,  polygon_buffer = 0.005, river_buffer = 0.003)
+    buildings = building_setup(*args)
+
+    buildings['intersects_buff'] = buildings['geometry'].apply(lambda poly: poly.intersects(buff))
+
+
+    filtered_geodataframe = buildings[buildings['intersects_buff']]
+
+    return filtered_geodataframe

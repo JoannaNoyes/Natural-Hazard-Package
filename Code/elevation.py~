@@ -1,0 +1,53 @@
+from .third_party import rasterio, pd
+from .river_data import river_data
+from .river_list import river_list
+
+
+def river_elevation(geotiff_path, *args, buffer = None):
+    #r, polygon = cut_river_list(*args, buffer = buffer)
+    #r['elevations'] = None
+
+    if buffer is None:
+        r, polygon = river_list(*args)
+        r['elevations'] = None
+        for i in range(len(r)):
+            riv = r.loc[r.index[i], 'geometry']
+            coords_list = list(riv.coords)
+            
+            elev = []
+        
+            with rasterio.open(geotiff_path) as src:
+                vals = src.sample(coords_list)
+                for val in vals:
+                    elev.append(val[0])
+                    
+            r.at[r.index[i], 'elevations'] = elev
+            
+        return r
+    else:
+        r, polyogn, buffered_polygon   = river_list(*args, buffer = buffer)
+        r['elevations'] = None
+    
+    
+    #This extracts the elevations and then adds it to the river function
+        for i in range(len(r)):
+            riv = r.loc[r.index[i], 'new geometry']
+            if isinstance(riv, MultiLineString):
+            	coords_list = []
+    		for line in riv.geoms:
+        		coords_set = list(line.coords)
+        		coords_list.extend(coords_set
+            elif isinstance(riv, LineString):
+            	coords_list = list(riv.coords) 
+            
+            
+            elev = []
+        
+            with rasterio.open(geotiff_path) as src:
+                vals = src.sample(coords_list)
+                for val in vals:
+                    elev.append(val[0])
+                    
+            r.at[r.index[i], 'elevations'] = elev
+            
+        return r

@@ -1,0 +1,4 @@
+def test(x, y):
+    #import matplotlib.pyplot as plt
+    print(x, y)
+    hazards.plt.plot(x,y)

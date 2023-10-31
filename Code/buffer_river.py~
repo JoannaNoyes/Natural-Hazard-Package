@@ -1,0 +1,13 @@
+from .river_list import river_list
+
+
+def river_buffer(*args, polygon_buffer = 0.005, river_buffer = 0.003):
+    river, polygon, buffered_polygon = river_list(*args, buffer = polygon_buffer)
+    buffer_total = Point(0,0).buffer(0)
+
+    for i in range(len(r)):
+        riv = river.loc[river.index[i], 'new geometry']
+        buffer = riv.buffer(0.003)
+        buffer_total = buffer_total.union(buffer)
+
+    return buffer_total
