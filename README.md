@@ -12,4 +12,4 @@ This package therefore contains geospatial analysis and visualization of regions
 
 # Package Structure
 A flow chart of the individual modules included in this package (callable and not), as well as the packages needed for each one.
-![Flow chart of the package structure](code_flowchart_landscape.drawio) 
+![Flow chart of the package structure](package_layout.drawio.png) 
