@@ -12,3 +12,4 @@ This package therefore contains geospatial analysis and visualization of regions
 
 # Package Structure
 
+![Flow chart of the package structure](code_flowchart.drawio.png)
