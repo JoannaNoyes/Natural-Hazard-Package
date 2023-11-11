@@ -10,3 +10,5 @@ This package therefore contains geospatial analysis and visualization of regions
 - Treemaps of the top n most common building types in the region can be determined.
 - Map of distance buffers across a region for a chosen single earthquake epicenter distance on top of buildings for that region
 
+# Package Structure
+
