@@ -3,7 +3,6 @@ message: "If you use this software, please cite it as below."
 authors:
 - family-names: "Noyes"
   given-names: "Joanna"
-
 title: "Natural Hazard Exposure Python Package"
 version: 1.0.0
 date-released: 2023-11-10
