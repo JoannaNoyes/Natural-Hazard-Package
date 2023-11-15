@@ -1,6 +1,8 @@
 # Natural Hazard Package
 [https://github.com/JoannaNoyes/Natural-Hazard-Package](https://github.com/JoannaNoyes/Natural-Hazard-Package)
+
 This package aims to (mostly) use only Open Street Maps (OSM) to create rudimentary hazard management analysis. This helps to kick start a larger project evaluating the need for and availability of free, easy acess datasets and simple, non-specialist ways to develop useful yet digestable hazard analysis. This was develop in the interest of non-specialist organisation and rural, low-income communities and aims to create useful datasets and plots to analyse hazards. 
+
 
 This package therefore contains geospatial analysis and visualization of regions using shapefiles and OpenStreetMap data.
 
