@@ -6,7 +6,7 @@ setup(
     name='hazards',
     version = '1.0.1'
     author='Joanna Noyes'
-    author_email = 'joannanoyes14@gmail.com'
+    author_email = 'joannanoyes@btinternet.com'
     desciption='A package to plot different aspects of hazard and risk when given a location and river shapefile'
     keywords='hazards, package, Python, risk'
     packages=find_packages()
@@ -18,6 +18,7 @@ setup(
         'plotly',
         'osmnx',
         'shapely',
-        'rasterio'
+        'rasterio',
+        'shapely'
         ],
     )
