@@ -29,6 +29,8 @@ def river_elevation(geotiff_path, *args, buffer=None):
         (geometry), the river name, the new reduced geometries due to the buffer, the km distances with respect to lat,
         lon location 0,0 for these reduced geometries, and the elevations.
     """
+    
+    #Take river info and calculate elevation from the geotiff file 
     if buffer is None:
         r, polygon = river_data(*args)
         r['elevations'] = None
@@ -39,8 +41,9 @@ def river_elevation(geotiff_path, *args, buffer=None):
             elif isinstance(riv, MultiLineString):
                 coords_list = [list(line.coords) for line in riv.geoms]
 
+		#Calculate elevation
             elev = []
-
+            
             with rasterio.open(geotiff_path) as src:
                 vals = src.sample(coords_list)
                 for val in vals:
@@ -53,7 +56,7 @@ def river_elevation(geotiff_path, *args, buffer=None):
         r, polygon, buffered_polygon = river_data(*args, buffer=buffer)
         r['elevations'] = None
 
-        # This extracts the elevations and then adds it to the river function
+        # This uses cut rivers instead of non cut one. Calculates same as above. 
         for i in range(len(r)):
             riv = r.loc[r.index[i], 'new geometry']
             if isinstance(riv, LineString):

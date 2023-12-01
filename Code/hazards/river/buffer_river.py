@@ -27,9 +27,12 @@ def river_buffer(*args, buffer_distance=0.003, river_cutoff=0.005):
     
     
     """
+    
+    #Pull info from river list for the river and polygons.
     river, polygon, buffered_polygon = river_list(*args, buffer=river_cutoff)
     buffer_total = Point(0, 0).buffer(0)
 
+	#Cut the river data to just points inside of the given buffere region. 
     for i in range(len(river)):
         riv = river.loc[river.index[i], 'new geometry']
         buffer = riv.buffer(buffer_distance)

@@ -33,12 +33,13 @@ def river_data(*args, buffer=None):
         
     river['km distances'] = None
 
+	#Extract the geometries of the river locations. 
     for j in range(len(river)):
         if buffer is None:
             geom = river.loc[river.index[j], 'geometry']
         else:
             geom = river.loc[river.index[j], 'new geometry']
-
+	#Create x,y locations to find the km distances from some reference point.
         if isinstance(geom, LineString):
             x, y = geom.xy
         elif isinstance(geom, MultiLineString):
@@ -48,6 +49,7 @@ def river_data(*args, buffer=None):
                 x.extend(xx)
                 y.extend(yy)
 
+	#Calculates km distances. (Place holder)
         distances_km = []
         for i in range(len(x)):
             dis = conversion(x[i], y[i])

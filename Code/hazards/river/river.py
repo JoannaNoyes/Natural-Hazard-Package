@@ -17,7 +17,7 @@ def river(*args): #, buffer = None):
     	A polygon of the given region
     """
 
-    tags = {'waterway': 'river'}
+    tags = {'waterway': 'river'} #Only want river waterways 
     river_data = []
     #The following print the geometries ('geometries') and the geometry that is interested as a Polygon ('polygon'). 
     #If no rivers are present in the location, the code will stop and not print out results
@@ -27,7 +27,7 @@ def river(*args): #, buffer = None):
         geometries = ox.features_from_place(name, tags=tags)
         
         shape = ox.features_from_place(name, tags={'name': name})
-        polygon = shape.unary_union
+        polygon = shape.unary_union #Calculate polygon on the region. 
                 
         if len(geometries) == 0:
             print(f'No rivers found in {name}')
@@ -52,6 +52,7 @@ def river(*args): #, buffer = None):
         print('        4 values: lat1, lat2, lon1, lon2')
         print('        1 value: The name of a given area')
         
+    #This will print every unique river name within the given region. This will be printed as the code is run. 
     unique_names = river_data[0][1]['name'].dropna().unique()
     
     print(river_data[0][1]['name'].nunique(), 'Unique Rivers Extracted:')

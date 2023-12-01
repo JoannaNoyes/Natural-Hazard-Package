@@ -25,7 +25,7 @@ def river_list(*args, buffer = None):
     	If a buffer is given, this will return the buffered polygon at the given lat, lon distance
     """
     
-    
+    #Takes info from rivers and extracts the additional buffer information. This is used in other modules.
     riv , polygon = river(*args)
     if buffer is None:
         return riv, polygon
