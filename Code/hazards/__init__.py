@@ -14,7 +14,7 @@ from .river.river_list import river_list
 from .river.elevation import river_elevation 
 from .building.building_plot import building_plot
 from .building.building_pieplot import building_pieplot
-from .building.building_treemap import building_treemap
+#from .building.building_treemap import building_treemap
 from .building.buffer_buildings2 import buffered_buildings
 from .building.building_elev import building_elev
 from .building.building_dis import building_dis

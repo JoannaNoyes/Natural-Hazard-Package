@@ -1,3 +1,5 @@
+#A list of third part packages used across the package. Individually uploaded to modules when needed. 
+
 import numpy as np 
 import matplotlib.pyplot as plt
 import pandas as pd
