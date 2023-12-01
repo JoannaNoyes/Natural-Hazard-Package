@@ -1,5 +1,6 @@
 from ..third_party import Point, np, ox, rasterio, gpd, wkt, plt
 from ..river.river_list import river_list
+from .build_step import building_setup
 
 def building_dis(*args):
     """
@@ -22,17 +23,9 @@ def building_dis(*args):
     #River data loaded from other hazard module 
     r, p, bp = river_list(*args, buffer = 0.005)
     
-    #Absolute elevation of buildings
-    if len(args) == 4:
-        buildings = ox.features_from_bbox(*args, tags={'building' : True})
-    elif len(args) == 1:
-        buildings = ox.features_from_place(*args, tags={'building' : True})
-    else:
-        print(f'Incorrect number of arguments. Got {len(args)+1}, expected:')
-        print('         1: name of location recognised by OSM')
-        print('         4: north, south, east, west points of area')
-    
-    
+    #Buildings
+    buildings = building_setup(*args)
+
     buildings['centroid'] = (buildings['geometry'].to_crs(crs=3857).centroid).to_crs(crs=4326) 
     coords_list = [(point.x, point.y) for point in buildings['centroid']] 
     
@@ -49,12 +42,11 @@ def building_dis(*args):
     #river location info
     riv_points = []
     for i in list(range(len(r['new geometry']))):
-        rx, ry  = r['new geometry'].iloc[i].xy
+        rx, ry  = r['new geometry'].iloc[i].xy   #At the moment on
         points = [Point(x, y) for x, y in zip(rx, ry)]
         riv_points = np.append(riv_points, points)
          
     #Calculating the distances. 
-    
     distance = []
     
     for i in range(len(building_points)):
@@ -63,8 +55,9 @@ def building_dis(*args):
     
     buildings['distance degrees'] = distance
 
+
+    #Return a plot of the distances
     max_dis = buildings['distance degrees'].max()
-    #distance_bins = range(0, math.ceil(max_dis) + 1, 30)
     distance_bins = np.linspace(0, max_dis, 200)
 
     building_count = []

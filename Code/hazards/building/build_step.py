@@ -16,6 +16,7 @@ def building_setup(*args):
 
     
     """
+    #Creates the building data from OSM through the use of .features_... commands. Also returns invalid error if incorrect number of arguments are passed.
     tags = {'building': True, }
     if len(args) == 1 and isinstance(args[0], str):
         name = args[0]
@@ -24,7 +25,7 @@ def building_setup(*args):
     elif len(args) == 4:
         print('Processing lat long grid')
         buildings = ox.features_from_bbox(args[0], args[1], args[2], args[3], tags=tags) #north, south, east, west
-    else:
+    else: #Code returned if wrong amount of arguments passed
         print('Invalid arguments passed. Either -')
         print('        1 values: The name of a given area, number of building types in pie chart, number of values of bar plot')
         print('        4 values: lat1, lat2, lon1, lon2, number of building types in pie chart, number of values of bar plot')

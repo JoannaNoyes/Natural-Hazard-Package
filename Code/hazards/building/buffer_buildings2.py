@@ -34,12 +34,13 @@ def buffered_buildings(*args, buffer_distance=0.003, inner_distance = None, rive
     
     This also returns a pie plot and a bar chart collectively showing the m+n (Default 29) largest building classifications within the given buffer of the rivers within that region
     """
-    
+    #Pull River data from .river_buffer()
     riv, pol, buf = river_buffer(*args, buffer_distance= buffer_distance , river_cutoff= river_cutoff)
     if inner_distance is not None:
         riv2, pol2, buf2 = river_buffer(*args, buffer_distance=inner_distance, river_cutoff=river_cutoff)
     buildings = building_setup(*args)
 
+	#Find only the buildings within the given buffer region buf and buf2.
     buildings['intersects_buff'] = buildings['geometry'].apply(lambda poly: poly.intersects(buf))
     
     buildings = buildings[buildings['intersects_buff']]
@@ -49,6 +50,7 @@ def buffered_buildings(*args, buffer_distance=0.003, inner_distance = None, rive
     	buildings = buildings[buildings['intersects_buff']]
     	shape = buf.difference(buf2)
     
+    #Piechart with the new truncated dataset
     b = buildings['building'].dropna(how='all')
     pie = [[],[]]
     for i in range(len(b.unique())):
@@ -58,21 +60,17 @@ def buffered_buildings(*args, buffer_distance=0.003, inner_distance = None, rive
     data = pd.DataFrame(pie).T
     data_asc = data[1:].sort_values([1], ascending=[False])
     #print('number of yes', data_asc[data_asc[0] == 'yes'].count())
-    data_asc = data_asc[data_asc[0] != 'yes']
+    data_asc = data_asc[data_asc[0] != 'yes']  #Remove 'yes' and 'no' column from piechart plot. 
     data_asc = data_asc[data_asc[0] != 'no']
     
     data_asc_top = data_asc[:n].set_index(0)
-    data_asc_bot = data_asc[n+1:n+1+m] 
+    data_asc_bot = data_asc[n+1:n+1+m]  #Seperating the values on the piechart and barchart 
     
     data_asc_top.loc[len(data_asc_top.index)] = [data_asc_bot[1].sum()] 
     data_asc_top = data_asc_top.rename(index={n: 'Other'})
+  
     
-#    if len(data_asc_bot)>= m:
-        
-#    if len(data_asc_bot)>= m:
-#        data_asc_bot = data_asc_bot[data_asc_bot[1] >= 3]
-    
-    
+    #Plot
     fig, ax = plt.subplots(1, 2, figsize=(15, 8))
 
     plt.subplot(1, 2, 1) 

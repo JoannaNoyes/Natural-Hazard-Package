@@ -1,5 +1,6 @@
 from ..third_party import Point, np, ox, rasterio
 from ..river.elevation import river_elevation
+from .build_step import building_setup
 
 def building_elev(geotiff_path,*args):
     """
@@ -23,20 +24,14 @@ def building_elev(geotiff_path,*args):
     #River data loaded from other hazard module 
     r = river_elevation(geotiff_path, *args, buffer = 0.005)
     
-    #Absolute elevation of buildings
-    if len(args) == 4:
-        buildings = ox.features_from_bbox(*args, tags={'building' : True})
-    elif len(args) == 1:
-        buildings = ox.features_from_place(*args, tags={'building' : True})
-    else:
-        print(f'Incorrect number of arguments. Got {len(args)+1}, expected:')
-        print('         2: link for geotiff elevation file, name of location recognised by OSM')
-        print('         5: link for geotiff elevation file, north, south, east, west points of area')
-    
-    
+    #building information from .build_step
+    buildings = building_setup(*args)
+
+    #Centroid building to allow for elevtation to be calculated
     buildings['centroid'] = (buildings['geometry'].to_crs(crs=3857).centroid).to_crs(crs=4326) 
     coords_list = [(point.x, point.y) for point in buildings['centroid']] 
     
+    #Devermine elevation of buildings
     elev = []
     
     with rasterio.open(geotiff_path) as src:
@@ -75,7 +70,7 @@ def building_elev(geotiff_path,*args):
     
     buildings = buildings[['geometry','centroid' ,'building', 'elevation', 'relative elevation']]
     
-    #Removes anomalies which return as ~-30,000 30,000 elevation
+    #Removes anomalies which return as ~-30,000 30,000 elevation. 
     buildings = buildings[(buildings['relative elevation'] >= -100) & (buildings['relative elevation'] <= 1000)]
     
     return buildings

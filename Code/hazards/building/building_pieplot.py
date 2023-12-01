@@ -24,8 +24,10 @@ def building_pie_func(*args, n = 9, m = 20):
 
     
     """
+    #Extract building information
     buildings = building_setup(*args)
        
+    #remove nan values, and seperate values into pieplot and bar chart
     b = buildings['building'].dropna(how='all')
     pie = [[],[]]
     for i in range(len(b.unique())):
@@ -36,19 +38,16 @@ def building_pie_func(*args, n = 9, m = 20):
     data_asc = data[1:].sort_values([1], ascending=[False])
     print('number of yes', data_asc[data_asc[0] == 'yes'].count())
     data_asc = data_asc[data_asc[0] != 'yes']
+    data_asc = data_asc[data_asc[0] != 'no']
     
     data_asc_top = data_asc[:n].set_index(0)
-    data_asc_bot = data_asc[n+1:n+1+m] 
+    data_asc_bot = data_asc[n+1:n+1+m] #Set the no. of values in piechart and barchart
     
     data_asc_top.loc[len(data_asc_top.index)] = [data_asc_bot[1].sum()] 
     data_asc_top = data_asc_top.rename(index={n: 'Other'})
     
-#    if len(data_asc_bot)>= m:
-        
-#    if len(data_asc_bot)>= m:
-#        data_asc_bot = data_asc_bot[data_asc_bot[1] >= 3]
     
-    
+    #Plot the figure:
     fig, ax = plt.subplots(1, 2, figsize=(15, 8))
 
     plt.subplot(1, 2, 1) 
@@ -60,6 +59,8 @@ def building_pie_func(*args, n = 9, m = 20):
     plt.xticks(rotation=90)
     plt.grid(linestyle = "dashed" , alpha = 0.5)
     plt.title('Other Building Types')
+
+
 
 
 def building_pieplot(*args, n = 9, m = 20):
