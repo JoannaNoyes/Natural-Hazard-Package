@@ -66,7 +66,7 @@ def sea_level_building_density(geotiff, place = None, low = 0, step_size = 10, c
         
     buildings['centroid'] = (buildings['geometry'].to_crs(crs = 3857).centroid).to_crs(crs = 4326)
     
-    buildings['p'] = (( buildings['centroid'].y - d ) / c - 1).astype(int) * m + (( buildings['centroid'].x - b ) / a - 1).astype(int)
+    buildings['p'] = (( buildings['centroid'].y - d ) / c ).astype(int) * m + (( buildings['centroid'].x - b ) / a).astype(int)
     buildings = buildings[buildings['p'] >= 0]
     
     numbers = []

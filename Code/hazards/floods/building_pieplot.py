@@ -55,11 +55,13 @@ def building_pie_func(*args, n = 9, m = 20):
     plt.title('10 Key Building Types')
     
     plt.subplot(1, 2, 2) 
-    plt.bar(data_asc_bot[0], data_asc_bot[1], color=plt.cm.tab10(np.arange(10)))
+    plt.bar(data_asc_bot[0], data_asc_bot[1], color= plt.cm.tab10(n))
     plt.xticks(rotation=90)
     plt.grid(linestyle = "dashed" , alpha = 0.5)
     plt.title('Other Building Types')
-
+    
+    plt.savefig('bar_chart.png')
+    
 
 
 

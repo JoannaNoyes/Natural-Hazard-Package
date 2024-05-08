@@ -61,7 +61,7 @@ def sea_level_buildings(geotiff, place = None, low = 0, high = 10, tag = 'reside
     	buildings = buildings[polygon.contains(build_points)]
     
     
-    buildings['p'] = (( buildings['centroid'].y - d ) / c - 1).astype(int) * m + (( buildings['centroid'].x - b ) / a - 1).astype(int)
+    buildings['p'] = (( buildings['centroid'].y - d ) / c ).astype(int) * m + (( buildings['centroid'].x - b ) / a).astype(int)
     buildings = buildings[buildings['p'] >= 0]
     
     p_values = result_matrix[(elevation < high) & (elevation > low)]

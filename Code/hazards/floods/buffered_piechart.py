@@ -78,7 +78,7 @@ def buffered_piechart(*args, buffer_distance=0.003, inner_distance = None, river
     plt.title(f'10 Key Building Types found within buffer {buffer_distance} and {inner_distance}')
     
     plt.subplot(1, 2, 2) 
-    plt.bar(data_asc_bot[0], data_asc_bot[1], color=plt.cm.tab10(np.arange(10)))
+    plt.bar(data_asc_bot[0], data_asc_bot[1], color=plt.cm.tab10(n))
     plt.xticks(rotation=90)
     plt.grid(linestyle = "dashed" , alpha = 0.5)
     plt.title('Other Building Types')
