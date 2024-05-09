@@ -2,9 +2,13 @@ Python Examples
 ---------------
 
 
-This folder shows examples of the different modules within the main package. They use the package (hazards) as well as additional third party packages listed near the top of each notebook. These notebooks provide evidence that the package is not designed for one specific location outside of the DEM data provided and results can be recreated for any location with available OpenStreetMap data. 
+This folder highlights three chosen case studies (one per hazard) and the plots and information can can be determined from them. It is important to note that these are chosen case studies, but this package aims to be usable across many, not just the ones shown here. 
+
+These notebooks also highlight a few of the decisions made in this package, including the integration of relative elevation to the nearest river location due to the elevational changes of the river Tweed in my testing.
 
 Notebooks
 ---------
-- Modules: Lists all of the callable modules and shows examples of their use
-- Building Relative Elevation: A notebook showing the chosen made when determining the building relative elevation plots. Shows the chose between using a average river elevation versus the more complex yet accurate method of taking this elevation relative to the closest river point. 
+- **Flooding**: An example of the flooding sub-package for Peebles, Scotland
+- **Sea level rise**: An example of the sea level rise sub-package for Leith, Scotland
+- **Landslides**: An example of the landslide sub-packge for Ojiya
+- **Other**
