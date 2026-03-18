@@ -1,6 +1,8 @@
 # Natural Hazard Package
 [https://github.com/JoannaNoyes/Natural-Hazard-Package](https://github.com/JoannaNoyes/Natural-Hazard-Package)
 
+_This was part of my Integrated Masters Project at the University of Edinburgh: Geophysics and Meteorology. _
+
 This package aims to use OpenStreetMaps (OSM) and other free, third-party datasets to couple complex exposure data with simple hazard models to explore exposure and risk. This tools aims to be computationally cheap, non-specialist and globally accessible. This was developed in the interest of non-specialist organisation and communities that may lack funding or interest in hazard management. This tool is therefore usable at all levels as a beginners tool for exploring risk. 
 
 
